@@ -1,7 +1,8 @@
-import { LucideProps } from 'lucide-react';
+import { LucideProps, User } from 'lucide-react';
 import { TrendingUp } from 'lucide-react';
 
 export const Icons = {
+  user: User,
   logo: (props: LucideProps) => (
     <TrendingUp/>
   ),
