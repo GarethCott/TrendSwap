@@ -3,22 +3,22 @@ import { Icons } from "./Icons"
 import {TrendingUp } from 'lucide-react';
 import UserAuthForm from "./UserAuthForm";
 
-const SignIn = () => {
+const SignUp = () => {
   return (
     <div className="container mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[400px]">
         <div className="flex flex-col space-y-2 text-center">
             <TrendingUp className="mx-auto h-6 w-6"/>
  
-            <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">Sign Up</h1>
             <p className="text-sm max-w-xs mx-auto">
                 By continuing, you are setting up a TrendSwap account and you agree to our User Agreement and Privacy Policy.
             </p>
             <UserAuthForm />
             <p className="px-8 text-center text-sm text-zinc-700">
-                New to TrendSwap?{''}
+                Already have an account with TrendSwap?{''}
             </p>
-            <Link href="/sign-up" className="hover:text-zinc-800 text-sm underline underline-offset-4">
-                Sign Up
+            <Link href="/sign-in" className="hover:text-zinc-800 text-sm underline underline-offset-4">
+                Sign In
             </Link>
             {/* sign in form */}
         </div>
@@ -26,4 +26,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default SignUp
