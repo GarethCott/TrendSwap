@@ -11,6 +11,11 @@ datasource db {
   relationMode = "prisma"
 }
 
+enum VoteType {
+  UP
+  DOWN
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -39,39 +44,39 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  createdSubreddits Subreddit[] @relation("Created By")
+  id                String         @id @default(cuid())
+  name              String?
+  email             String?        @unique
+  emailVerified     DateTime?
+  createdSubreddits Subreddit[]    @relation("CreatedBy")
+  subscriptions     Subscription[]
+  votes             Vote[]
 
   username String? @unique
 
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  Post          Post[]
-  Comment       Comment[]
-  CommentVote   CommentVote[]
-  Vote          Vote[]
-  Subscriptions Subscriptions[]
+  image       String?
+  accounts    Account[]
+  sessions    Session[]
+  Post        Post[]
+  Comment     Comment[]
+  CommentVote CommentVote[]
 }
 
 model Subreddit {
   id        String   @id @default(cuid())
   name      String   @unique
-  createAt  DateTime @default(now())
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  posts      Post[]
+  posts     Post[]
 
   creatorId   String?
-  Creator     User?           @relation("Created By", fields: [creatorId], references: [id])
-  subscribers Subscriptions[]
+  Creator     User?          @relation("CreatedBy", fields: [creatorId], references: [id])
+  subscribers Subscription[]
 
   @@index([name])
 }
 
-model Subscriptions {
+model Subscription {
   user        User      @relation(fields: [userId], references: [id])
   userId      String
   subreddit   Subreddit @relation(fields: [subredditId], references: [id])
@@ -81,19 +86,17 @@ model Subscriptions {
 }
 
 model Post {
-  id          String     @id @default(cuid())
+  id          String    @id @default(cuid())
   title       String
   content     Json?
-  createAt    DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  subreddit   Subreddit? @relation(fields: [subredditId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+  subreddit   Subreddit @relation(fields: [subredditId], references: [id])
   subredditId String
-
-  author   User   @relation(fields: [autherId], references: [id])
-  autherId String
-
-  comments Comment[]
-  votes     Vote[]
+  comments    Comment[] 
+  votes       Vote[]
 }
 
 model Comment {
@@ -102,26 +105,21 @@ model Comment {
   createdAt DateTime @default(now())
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String
 
   replyToId String?
   replyTo   Comment?  @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  replied   Comment[] @relation("ReplyTo")
+  replies   Comment[] @relation("ReplyTo")
 
   votes     CommentVote[]
   commentId String?
 }
 
-enum VoteType {
-  UP
-  DOWN
-}
-
 model Vote {
   user   User     @relation(fields: [userId], references: [id])
   userId String
-  post   Post     @relation(fields: [postId], references: [id])
+  post   Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
   type   VoteType
 
@@ -131,7 +129,7 @@ model Vote {
 model CommentVote {
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  comment   Comment  @relation(fields: [commentId], references: [id])
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
   commentId String
   type      VoteType
 
