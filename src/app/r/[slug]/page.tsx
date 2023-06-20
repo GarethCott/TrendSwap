@@ -39,6 +39,7 @@ const page = async ({ params }: PageProps) => {
             r/{subreddit.name}
         </h1>
         <MiniCreatePost session={session} />
+        {/* {TODO : Show [osts in user feed]} */}
     </>
   )
 }
