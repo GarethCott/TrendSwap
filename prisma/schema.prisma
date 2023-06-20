@@ -62,7 +62,7 @@ model Subreddit {
   name      String   @unique
   createAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
-  post      Post[]
+  posts      Post[]
 
   creatorId   String?
   Creator     User?           @relation("Created By", fields: [creatorId], references: [id])
