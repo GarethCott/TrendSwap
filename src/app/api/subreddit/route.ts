@@ -31,7 +31,7 @@ export async function POST(req: Request) {
             },
         })
 
-        await db.subscriptions.create({
+        await db.subscription.create({
             data: {
                 userId: session.user.id,
                 subredditId: subreddit.id,

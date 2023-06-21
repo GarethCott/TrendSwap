@@ -90,13 +90,13 @@ const Layout = async ({
                             </div>
                         ) : null}
 
-                        {/* {subreddit.creatorId !== session?.user.id ? (
-                            <SubscribeLeaveToggle/>
-                        ) : null} */}
+                        {subreddit.creatorId !== session?.user.id ? (
+                            <SubscribeLeaveToggle subredditId={subreddit.id} subredditName={subreddit.name} isSubscribed={isSubscribed}/>
+                        ) : null}
                     </dl>
                 </div>
             </div>
-        </div>
+        </div> 
     </div>
   )
 }
