@@ -1,4 +1,5 @@
 "use client"
+
 import { ExtendedPost } from '@/types/db'
 import { FC, useEffect, useRef } from 'react'
 import {useIntersection} from '@mantine/hooks'
