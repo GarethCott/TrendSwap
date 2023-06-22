@@ -27,7 +27,10 @@ const page = async ({ params }: PageProps) => {
                     comments: true,
                     subreddit : true,
                 },
-                take: INFINITE_SCROLLING_PAGINATION_RESULTS
+                orderBy: {
+                  createdAt: 'desc',
+                },
+                take: INFINITE_SCROLLING_PAGINATION_RESULTS,
             }
         }
     })
