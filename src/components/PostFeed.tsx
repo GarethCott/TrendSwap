@@ -8,6 +8,7 @@ import { INFINITE_SCROLLING_PAGINATION_RESULTS } from '@/config'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import Post from './Post'
+import { Loader2 } from 'lucide-react'
 
 interface PostFeedProps {
   initialPosts: ExtendedPost[]
@@ -49,7 +50,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName}) => {
     const posts = data?.pages.flatMap((page)=> page) ?? initialPosts
 
   return (
-
+                    
     <ul className='flex flex-col col-span-2 space-y-6'>
         {posts.map((post, index)=> {
             const votesAmt = post.votes.reduce((acc: number, vote: { type: string }) => {
@@ -60,6 +61,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName}) => {
 
             const currentVote = post.votes.find((vote: { userId: any }) => vote.userId === session?.user.id ) 
 
+            
             if(index === posts.length - 1) {
                 return (
                     <li key={post.id} ref={ref}>
@@ -71,6 +73,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName}) => {
             }
         })}
     </ul>
+    
 
     )
 }
