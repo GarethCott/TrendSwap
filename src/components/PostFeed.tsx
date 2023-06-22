@@ -69,9 +69,15 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName}) => {
                     </li>
                 )
             } else {
-                return <Post currentVote={currentVote} votesAmt={votesAmt} commentAmt={post.comments.length} post={post} subredditName={post.subreddit.name}/>
+                return <Post currentVote={currentVote} votesAmt={votesAmt} commentAmt={post.comments.length} post={post} subredditName={post.subreddit.name} key={post.id}/>
             }
         })}
+
+        {isFetchingNextPage && (
+            <li className='flex justify-center'>
+            <Loader2 className='w-6 h-6 text-zinc-500 animate-spin' />
+            </li>
+      )}
     </ul>
     
 
