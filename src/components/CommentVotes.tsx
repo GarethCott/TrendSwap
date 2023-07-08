@@ -86,7 +86,7 @@ const CommentVote: FC<CommentVoteProps> = ({
             })}/>
         </Button>
 
-        <p className='text-center py-2 font-medium text-sm text-zinc-900'>
+        <p className='text-center py-2 px-1  font-medium text-xs text-zinc-900'>
             {votesAmt}
         </p>
         <Button onClick={()=> vote('DOWN')} size='sm' variant='ghost' aria-label='downvote'>

@@ -10,7 +10,7 @@ const CloseModal = () => {
 
   return (
     <Button variant='subtle' className='h-6 w-6 p-0 rounded-md' onClick={() => router.back()} aria-label='close modal'>
-        <X className='h-4 w-4'/>
+         <X aria-label='close modal' className='h-4 w-4' />
     </Button>
   )
 }

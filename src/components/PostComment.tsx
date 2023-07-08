@@ -80,7 +80,7 @@ const {mutate: postComment, isLoading} = useMutation({
         </div>
 
         <p className='text-sm text-zinc-900 mt-2'>{comment.text}</p>
-        <div className='flex gap-2 items-center flex-wrap'>
+        <div className='flex gap-2 items-center'>
             <CommentVotes commentId={comment.id} initialVotesAmt={votesAmt} initialVote={currentVote}/>
 
             <Button onClick={()=> {
