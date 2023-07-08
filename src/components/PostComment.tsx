@@ -62,7 +62,7 @@ const {mutate: postComment, isLoading} = useMutation({
 })
 
   return (
-    <div className='flex flex-col'>
+    <div ref={commentRef} className='flex flex-col'>
         <div className='flex items-center'>
             <UserAvatar user={{
                 name:comment.author.name || null,
